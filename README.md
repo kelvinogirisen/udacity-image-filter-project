@@ -11,7 +11,9 @@ You'll need to create a new node server. Open a new terminal within the project 
 
 
 
-### Deploying your system
+### AWS URLs
 
-Follow the process described in the course to `eb init` a new application and `eb create` a new environment to deploy your image-filter service! Don't forget you can use `eb deploy` to push changes.
+1. AWS Deployed image application without image: http://udagram-image-filter-app-dev.us-east-1.elasticbeanstalk.com/
+
+2. AWS Deployed App with Image URL: http://udagram-image-filter-app-dev.us-east-1.elasticbeanstalk.com/filteredimage?image_url=https://cdn.udacity.com/profile/production/photo/cfc88292-3807-4b3c-986e-ae4fa710b58a.jpeg
 
