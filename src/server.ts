@@ -1,4 +1,5 @@
 import express from 'express';
+import {Request, Response} from 'express';
 import bodyParser from 'body-parser';
 import {filterImageFromURL, deleteLocalFiles} from './util/util';
 
@@ -18,7 +19,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   // endpoint to filter an image from a public url.
 
   
-  app.get("/filteredimage", async (req, res) => {
+  app.get("/filteredimage", async (req: Request, res: Response) => {
     const {image_url} = req.query;
     if (!image_url) {
       res.status(400).send({message: 'image_url is required'});
@@ -26,28 +27,17 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
     
     try {
       const filteredpath = await filterImageFromURL(image_url);
-      console.log(res.status(422));
-      
+            
       res.status(200).sendFile(filteredpath, async (error) => {
         if (error) {
-          throw new Error('Processing Error!');
+          throw new Error('Server Processing Error!');
         }
-        await deleteLocalFiles([filteredpath])});
-      console.log(filteredpath);
+        await deleteLocalFiles([filteredpath])
+      });
+      
     } catch (error) {
       res.status(422);
     } });
-
-  // IT SHOULD
-  //    1
-  //    1. validate the image_url query
-  //    2. call filterImageFromURL(image_url) to filter the image
-  //    3. send the resulting file in the response
-  //    4. deletes any files on the server on finish of the response
-  // QUERY PARAMATERS
-  //    image_url: URL of a publicly accessible image
-  // RETURNS
-  //   the filtered image file [!!TIP res.sendFile(filteredpath); might be useful]
 
   /**************************************************************************** */
 
