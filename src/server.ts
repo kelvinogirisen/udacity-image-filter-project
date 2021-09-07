@@ -26,10 +26,11 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
     
     try {
       const filteredpath = await filterImageFromURL(image_url);
+      console.log(res.status(422));
       
       res.status(200).sendFile(filteredpath, async (error) => {
         if (error) {
-          throw new Error('The file transfer was intruppted due to a server error');
+          throw new Error('Processing Error!');
         }
         await deleteLocalFiles([filteredpath])});
       console.log(filteredpath);
